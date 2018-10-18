@@ -17,9 +17,8 @@ testDF<- DataFrame[-ind,]
 allVars<- colnames(DataFrame)
 predictorVars<- allVars[!allVars%in%"medv"]
 predictorVars<- paste(predictorVars,collapse = "+")
-form= as.formula(paste("medv~", predictorVars,collapse = "+"))
-neuralModel<- neuralnet(formula= form,hidden = c(4,2),linear.output = T, data= trainDF)
-neuralModel<- neuralnet(formula= form,hidden = c(4,2),linear.output = T, data= trainDF)
+neuralModel<- neuralnet(formula = form, hidden = c(4,2), linear.output = T, data = trainDF)
+plot(neuralModel)
 predictions <- compute(neuralModel,testDF[,1:13])
 str(predictions)
 predictions <- predictions$net.result*(max(testDF$medv)-min(testDF$medv))+min(testDF$medv)
